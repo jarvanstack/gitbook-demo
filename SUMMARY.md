@@ -12,4 +12,3 @@
     * [本地浏览](3.发布GitBook/本地浏览.md)
     * [发布到GitHub Page](3.发布GitBook/发布到GitHubPage.md)
     * [发布静态网站](3.发布GitBook/发布静态网站.md)
-

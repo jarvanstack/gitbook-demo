@@ -41,13 +41,13 @@ rm -rf _book
 cd ../gh-pages
 git add .
 git commit -m "feat(pages): update pages"
-git push origin gh-pages:gh-pages
+git push -f origin gh-pages:gh-pages
 cd ..
 # 删除gh-pages文件夹
 rm -rf gh-pages
 ```
 
-执行自动脚本
+### 执行自动脚本
 
 ```bash
 chmod +x push-pages.bash
@@ -88,15 +88,7 @@ $ git clone -b gh-pages git@github.com:dengjiawen8955/gitbook-demo.git  ../gh-pa
 # 构建静态网页到 ./_book 临时文件夹
 $ gitbook build ./ ./_book
 info: 7 plugins are installed 
-info: 6 explicitly listed 
-info: loading plugin "highlight"... OK 
-info: loading plugin "search"... OK 
-info: loading plugin "lunr"... OK 
-info: loading plugin "sharing"... OK 
-info: loading plugin "fontsettings"... OK 
-info: loading plugin "theme-default"... OK 
-info: found 12 pages 
-info: found 1 asset files 
+...
 info: >> generation finished with success in 2.3s ! 
 # 复制静态网页
 $ cp -r _book/* ../gh-pages/

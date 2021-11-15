@@ -1,5 +1,6 @@
 # 编写SUMMARY.md
 
+SUMMARY.md 就是一个目录文件, 我们用它编写自动生成模板文档
 ## 创建 SUMMARY.md
 
 可以使用 `gitbook init` 自动创建, 或者手动创建
