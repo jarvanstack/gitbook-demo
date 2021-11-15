@@ -320,7 +320,46 @@
                                 <h1 id="&#x53D1;&#x5E03;&#x5230;github-page">&#x53D1;&#x5E03;&#x5230;GitHub Page</h1>
 <p>&#x4E2A;&#x4EBA;&#x559C;&#x6B22;&#x4E00;&#x822C;&#x5C06; gitbook &#x7684; markdown &#x6E90;&#x7801;&#x548C;&#x53D1;&#x5E03;&#x7684; github page &#x653E;&#x5230;&#x4E00;&#x4E2A;&#x4ED3;&#x5E93;</p>
 <p>&#x5177;&#x4F53;&#x64CD;&#x4F5C;&#x5982;&#x4E0B;</p>
-<h2 id="&#x521B;&#x5EFA;-gh-pages-&#x5206;&#x652F;">&#x521B;&#x5EFA; gh-pages &#x5206;&#x652F;</h2>
+<h2 id="&#x81EA;&#x52A8;&#x53D1;&#x5E03;">&#x81EA;&#x52A8;&#x53D1;&#x5E03;</h2>
+<h3 id="&#x521B;&#x5EFA;&#x811A;&#x672C;-push-pagesbash">&#x521B;&#x5EFA;&#x811A;&#x672C; push-pages.bash</h3>
+<p>&#x521B;&#x5EFA;&#x811A;&#x672C; push-pages.bash </p>
+<pre><code class="lang-bash">vim push-pages.bash
+</code></pre>
+<p>&#x811A;&#x672C;&#x5982;&#x4E0B;</p>
+<p><strong>&#x8FDC;&#x7A0B;&#x5730;&#x5740;&#x8BF7;&#x66FF;&#x6362;&#x4E3A;&#x81EA;&#x5DF1;&#x7684;&#x8FDC;&#x7A0B;&#x4ED3;&#x5E93; ssh &#x5730;&#x5740;</strong></p>
+<pre><code class="lang-bash"><span class="hljs-comment"># &#x8FDC;&#x7A0B;&#x5730;&#x5740;&#x8BF7;&#x66FF;&#x6362;&#x4E3A;&#x81EA;&#x5DF1;&#x7684;&#x8FDC;&#x7A0B;&#x4ED3;&#x5E93; ssh &#x5730;&#x5740;,&#x4F7F;&#x7528; git remote -v &#x67E5;&#x770B;,</span>
+REPO_PATH=git@github.com:dengjiawen8955/gitbook-demo.git
+
+<span class="hljs-comment"># bin/bash</span>
+<span class="hljs-comment"># &#x521B;&#x5EFA;&#x65B0;&#x7684;&#x5206;&#x652F;&#x5E76;&#x5207;&#x6362;&#x5230;&#x8BE5;&#x5206;&#x652F;</span>
+git branch <span class="hljs-_">-d</span> gh-pages
+git checkout -b gh-pages
+<span class="hljs-comment"># &#x5207;&#x6362;&#x56DE;&#x4E3B;&#x5206;&#x652F;</span>
+git checkout master
+<span class="hljs-comment"># &#x5C06;&#x672C;&#x5730;&#x65B0;&#x5EFA;&#x7684;&#x5206;&#x652F;&#x63A8;&#x9001;&#x5230;&#x8FDC;&#x7A0B;</span>
+git push origin gh-pages:gh-pages
+<span class="hljs-comment"># &#x6211;&#x4EEC;&#x53EA;&#x514B;&#x9686;&#x4E86;gh-pages&#x5206;&#x652F;&#xFF0C;&#x5E76;&#x5B58;&#x653E;&#x5728;&#x4E00;&#x4E2A;&#x76EE;&#x5F55;gh-pages&#x91CC;&#x9762;</span>
+git <span class="hljs-built_in">clone</span> -b gh-pages <span class="hljs-variable">${REPO_PATH}</span>  ../gh-pages
+<span class="hljs-comment"># &#x6784;&#x5EFA;&#x9759;&#x6001;&#x7F51;&#x9875;&#x5230; ./_book &#x4E34;&#x65F6;&#x6587;&#x4EF6;&#x5939;</span>
+gitbook build ./ ./_book
+<span class="hljs-comment"># &#x590D;&#x5236;&#x9759;&#x6001;&#x7F51;&#x9875;</span>
+cp -r _book/* ../gh-pages/
+<span class="hljs-comment"># &#x5220;&#x9664;&#x4E34;&#x65F6;&#x6587;&#x4EF6;</span>
+rm -rf _book
+<span class="hljs-comment"># push &#x5206;&#x652F;&#x5230;&#x4ED3;&#x5E93;</span>
+<span class="hljs-built_in">cd</span> ../gh-pages
+git add .
+git commit -m <span class="hljs-string">&quot;feat(pages): update pages&quot;</span>
+git push <span class="hljs-_">-f</span> origin gh-pages:gh-pages
+<span class="hljs-built_in">cd</span> ..
+<span class="hljs-comment"># &#x5220;&#x9664;gh-pages&#x6587;&#x4EF6;&#x5939;</span>
+rm -rf gh-pages
+</code></pre>
+<p>&#x6267;&#x884C;&#x81EA;&#x52A8;&#x811A;&#x672C;</p>
+<pre><code class="lang-bash">chmod +x push-pages.bash
+./push-pages.bash
+</code></pre>
+<h2 id="&#x624B;&#x52A8;&#x53D1;&#x5E03;">&#x624B;&#x52A8;&#x53D1;&#x5E03;</h2>
 <blockquote>
 <p>&#x6CE8;&#x610F;: &#x5206;&#x652F;&#x540D;&#x5FC5;&#x987B;&#x4E3A; gh-page</p>
 </blockquote>
@@ -342,20 +381,10 @@ remote:      https://github.com/dengjiawen8955/gitbook-demo/pull/new/gh-page
 remote: 
 To github.com:dengjiawen8955/gitbook-demo.git
  * [new branch]      gh-pages -&gt; gh-pages
-<span class="hljs-comment"># &#x521B;&#x5EFA;&#x4E13;&#x95E8;&#x653E;&#x65B0;&#x5206;&#x652F;&#x7684;&#x6587;&#x4EF6;&#x5939; mkdir gh-pages</span>
-$ mkdir ../gh-pages 
-<span class="hljs-comment"># &#x7F16;&#x8F91; .gitignore &#x5C06; gh-pages &#x589E;&#x52A0;&#x5230;&#x91CC;&#x9762;</span>
-$ vim .gitignore
-</code></pre>
-<p>.gitignore &#x793A;&#x4F8B;</p>
-<pre><code class="lang-.gitignore"># &#x81EA;&#x52A8;&#x751F;&#x6210;&#x7684;&#x56FE;&#x4E66;&#x7684;&#x5185;&#x5BB9;
-_*/
-# github page
-gh-pages
 </code></pre>
 <pre><code class="lang-bash">
 <span class="hljs-comment"># &#x6211;&#x4EEC;&#x53EA;&#x514B;&#x9686;&#x4E86;gh-pages&#x5206;&#x652F;&#xFF0C;&#x5E76;&#x5B58;&#x653E;&#x5728;&#x4E00;&#x4E2A;&#x76EE;&#x5F55;gh-pages&#x91CC;&#x9762;</span>
-$ git <span class="hljs-built_in">clone</span> -b gh-pages git@github.com:dengjiawen8955/gitbook-demo.git  ./gh-pages
+$ git <span class="hljs-built_in">clone</span> -b gh-pages git@github.com:dengjiawen8955/gitbook-demo.git  ../gh-pages
 <span class="hljs-comment"># &#x6784;&#x5EFA;&#x9759;&#x6001;&#x7F51;&#x9875;&#x5230; ./_book &#x4E34;&#x65F6;&#x6587;&#x4EF6;&#x5939;</span>
 $ gitbook build ./ ./_book
 info: 7 plugins are installed 
@@ -369,8 +398,18 @@ info: loading plugin <span class="hljs-string">&quot;theme-default&quot;</span>.
 info: found 12 pages 
 info: found 1 asset files 
 info: &gt;&gt; generation finished with success <span class="hljs-keyword">in</span> 2.3s ! 
-$
+<span class="hljs-comment"># &#x590D;&#x5236;&#x9759;&#x6001;&#x7F51;&#x9875;</span>
+$ cp -r _book/* ../gh-pages/
+<span class="hljs-comment"># push &#x5206;&#x652F;&#x5230;&#x4ED3;&#x5E93;</span>
+$ <span class="hljs-built_in">cd</span> ../gh-pages
+$ git add .
+$ git commit -m <span class="hljs-string">&quot;feat(web): init web&quot;</span>
+$ git push origin gh-pages:gh-pages
 </code></pre>
+<h2 id="&#x67E5;&#x770B;&#x6548;&#x679C;">&#x67E5;&#x770B;&#x6548;&#x679C;</h2>
+<p>&#x8BBF;&#x95EE;: <a href="https://{&#x7528;&#x6237;&#x540D;}.github.io/{&#x4ED3;&#x5E93;&#x540D;}" target="_blank">https://{&#x7528;&#x6237;&#x540D;}.github.io/{&#x4ED3;&#x5E93;&#x540D;}</a> &#x67E5;&#x770B;&#x6548;&#x679C;</p>
+<p>&#x4F8B;&#x5982;:</p>
+<p><a href="https://dengjiawen8955.github.io/gitbook-demo" target="_blank">https://dengjiawen8955.github.io/gitbook-demo</a></p>
 
                                 
                                 </section>
@@ -414,7 +453,7 @@ $
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"发布到GitHub Page","level":"1.4.2","depth":2,"next":{"title":"发布静态网站","level":"1.4.3","depth":2,"path":"3.发布GitBook/发布静态网站.md","ref":"3.发布GitBook/发布静态网站.md","articles":[]},"previous":{"title":"本地浏览","level":"1.4.1","depth":2,"path":"3.发布GitBook/本地浏览.md","ref":"3.发布GitBook/本地浏览.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"duoshuo":{"short_name":"wiznote","theme":"default"},"fontsettings":{"theme":"white","family":"sans","size":2},"fontSettings":{"theme":"white","family":"serif","size":2},"highlight":{},"ga":{"token":"UA-39088953-8"},"sharing":{"qq":false,"all":["facebook","google","twitter","weibo","instapaper"],"facebook":false,"weibo":false,"qrcode":false,"instapaper":false,"twitter":false,"vk":false,"google":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","keywords":"使用手册,markdown,gitbook,","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":36,"bottom":36},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Gitbook使用入门","links":{"home":false,"about":false,"issues":false,"contribute":false,"sidebar":{"作者":"http://tonydeng.github.io/"},"tail":{"Gitbook使用入门":"http://tonydeng.github.io/gitbook-zh/gitbook-howtouse/"},"gitbook":false,"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"qq":false,"qrcode":false}},"introduction":{"path":"README.md","title":"Gitbook使用入门概述"},"gitbook":"*","description":"Gitbook使用入门"},"file":{"path":"3.发布GitBook/发布到GitHubPage.md","mtime":"2021-11-15T06:37:39.140Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-11-15T06:37:44.551Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"发布到GitHub Page","level":"1.4.2","depth":2,"next":{"title":"发布静态网站","level":"1.4.3","depth":2,"path":"3.发布GitBook/发布静态网站.md","ref":"3.发布GitBook/发布静态网站.md","articles":[]},"previous":{"title":"本地浏览","level":"1.4.1","depth":2,"path":"3.发布GitBook/本地浏览.md","ref":"3.发布GitBook/本地浏览.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"duoshuo":{"short_name":"wiznote","theme":"default"},"fontsettings":{"theme":"white","family":"sans","size":2},"fontSettings":{"theme":"white","family":"serif","size":2},"highlight":{},"ga":{"token":"UA-39088953-8"},"sharing":{"qq":false,"all":["facebook","google","twitter","weibo","instapaper"],"facebook":false,"weibo":false,"qrcode":false,"instapaper":false,"twitter":false,"vk":false,"google":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","keywords":"使用手册,markdown,gitbook,","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":36,"bottom":36},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Gitbook使用入门","links":{"home":false,"about":false,"issues":false,"contribute":false,"sidebar":{"作者":"http://tonydeng.github.io/"},"tail":{"Gitbook使用入门":"http://tonydeng.github.io/gitbook-zh/gitbook-howtouse/"},"gitbook":false,"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"qq":false,"qrcode":false}},"introduction":{"path":"README.md","title":"Gitbook使用入门概述"},"gitbook":"*","description":"Gitbook使用入门"},"file":{"path":"3.发布GitBook/发布到GitHubPage.md","mtime":"2021-11-15T07:00:57.738Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-11-15T07:01:40.502Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
