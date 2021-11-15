@@ -6,7 +6,7 @@
         "path": "README.md",
         "title": "Gitbook使用入门概述"
     },
-     "plugins": [],
+    "plugins": [],
     "pluginsConfig": {
         "fontSettings": {
         "theme": "white",
@@ -27,10 +27,10 @@
         "issues": false,
         "contribute": false,
         "sidebar": {
-            "作者": "http://tonydeng.github.io/"
+            "作者": "http://dengjiawen8955.github.io/"
         },
         "tail": {
-            "Gitbook使用入门": "http://tonydeng.github.io/gitbook-zh/gitbook-howtouse/"
+            "Gitbook使用入门": "http://dengjiawen8955.github.io/gitbook-demo"
         },
         "gitbook": false,
         "sharing": {

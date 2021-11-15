@@ -10,12 +10,12 @@ git checkout master
 git push origin gh-pages:gh-pages
 # 我们只克隆了gh-pages分支，并存放在一个目录gh-pages里面
 git clone -b gh-pages ${REPO_PATH}  ../gh-pages
-# 构建静态网页到 ./_book 临时文件夹
-gitbook build ./ ./_book
+# 构建静态网页到 ./_book_temp 临时文件夹
+gitbook build ./ ./_book_temp
 # 复制静态网页
-cp -r _book/* ../gh-pages/
+cp -r _book_temp/* ../gh-pages/
 # 删除临时文件
-rm -rf _book
+rm -rf _book_temp
 # push 分支到仓库
 cd ../gh-pages
 git add .
